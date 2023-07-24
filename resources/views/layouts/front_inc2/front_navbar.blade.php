@@ -24,19 +24,44 @@
           <a class="{{Request::is('/contact') ? 'active':'' }}" href="contact.html">Contact</a>
         </li> --}}
 
-        <li>
-          <a class="{{Request::is('/sign-in') ? 'active':'' }}" href="{{route('frontend2.signin')}}">sign in</a>
-        </li>
+        
 
-        <li>
-          <a class="{{Request::is('/sign-up') ? 'active':'' }}" href="{{route('frontend2.signup')}}">sign up</a>
-        </li>
+        @guest
+            @if (Route::has('login'))
+              <li>
+                <a class="{{Request::is('/sign-in') ? 'active':'' }}" href="{{route('frontend2.signin')}}">sign in</a>
+              </li>
+            @endif
 
-        <li>
-          <a class="{{Request::is('/cart') ? 'active':'' }}" href="{{route('frontend2.cart.view')}}">
-            <i class="far fa-shopping-bag"></i>
-          </a>
-        </li>
+            @if (Route::has('register'))
+              <li>
+                <a class="{{Request::is('/sign-up') ? 'active':'' }}" href="{{route('frontend2.signup')}}">sign up</a>
+              </li>
+            @endif
+        @else
+
+          <li class="cart-button">
+            <a class="{{Request::is('/cart') ? 'active':'' }}" href="{{route('frontend2.cart.view')}}">
+              <i class="far fa-shopping-bag"></i> ({{App\Models\Cart::where('user_id',Auth::id())->count()}})
+            </a>
+          </li>
+            <li>
+                <a class="{{Request::is('/profile') ? 'active':'' }}" href="{{ url('/profile') }}">Profile</a>
+            </li>
+            <li>
+                <a class="{{Request::is('/my-orders') ? 'active':'' }}" href="{{ url('/my-orders') }}">My Orders</a>
+            </li>
+
+            <li>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();" href="{{ url('/my-orders') }}">Logout</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+            </li>
+
+
+        @endguest
 
     </ul>
    </div>

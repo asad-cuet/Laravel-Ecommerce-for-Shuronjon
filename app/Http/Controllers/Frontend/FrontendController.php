@@ -14,15 +14,28 @@ class FrontendController extends Controller
 {
     public function index() 
     {
-        // $feteared_product=Product::where('trending','1')->where('status',1)->take(15)->get();
+        $featured_products=Product::where('trending','1')->where('status',1)->orderBy('id','DESC')->get();
         // $trending_category=Category::where('popular','1')->where('status',1)->take(15)->get();
-        // return view('frontend/dashboard',['feteaured_product'=>$feteared_product,'trending_category'=>$trending_category]);
-        return view('frontend2/home');
+        return view('frontend2/home',['featured_products'=>$featured_products]);
 
     }
-    public function shopView() 
+    public function shopView(Request $request) 
     {
-        return view('frontend2/shop');
+        if($request->serach_key!='')
+        {
+            $products=Product::Where('name','like', "%{$request->serach_key}%")
+                ->orWhere('selling_price','like', "%{$request->serach_key}%")
+                ->orderBy('id','DESC')->get();
+        }
+        else
+        {
+            $products=Product::where('status',1)->orderBy('id','DESC')->get();
+        }
+
+        $obj=[
+            'products'=>$products
+        ];
+        return view('frontend2/shop',$obj);
 
     }
     public function cart() 

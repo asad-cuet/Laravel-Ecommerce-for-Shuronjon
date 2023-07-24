@@ -27,8 +27,6 @@ Orders
                                     <thead>
                                           <tr>
                                                 <th>Order Date</th>
-                                                <th>Tracking Number</th>
-                                                <th>Transiction ID</th>
                                                 <th>Total Price</th>
                                                 <th>Payment Mode</th>
                                                 <th>Status</th>
@@ -39,8 +37,6 @@ Orders
                                           @foreach ($order as $item)
                                               <tr>
                                                     <td>{{date('d-m-Y',strtotime($item->created_at))}}</td>
-                                                    <td>{{$item->tracking_no}}</td>
-                                                    <td>{{$item->payment_id}}</td>
                                                     <td>{{$item->total_price}}</td>
                                                     <td>{{$item->payment_mode}}</td>
                                                     <td>{{$item->status==0 ? 'Pending':'Completed'}}</td>

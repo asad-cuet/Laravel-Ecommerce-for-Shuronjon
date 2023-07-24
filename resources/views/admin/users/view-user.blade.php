@@ -24,41 +24,13 @@
                                               <div class="border p-2">{{$user->role_as==0 ? 'User':'Admin'}}</div>
                                     </div>
                                     <div class="col-md-4 mt-3">
-                                          <label for="">First Name</label>
-                                              <div class="border p-2">{{$user->fname}}</div>
+                                          <label for="">Name</label>
+                                              <div class="border p-2">{{$user->name}}</div>
                                     </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">Last Name</label>
-                                              <div class="border p-2">{{$user->lname}}</div>
-                                    </div>
+
                                     <div class="col-md-4 mt-3"><label for="">Email</label>
                                           <div class="border p-2">{{$user->email}}</div></div>
-                                    <div class="col-md-4 mt-3"><label for="">Phone</label>
-                                          <div class="border p-2">{{$user->phone}}</div></div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">Address 1</label>
-                                              <div class="border p-2">{{$user->address1}}</div>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">Address 1</label>
-                                              <div class="border p-2">{{$user->address2}}</div>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">City</label>
-                                              <div class="border">{{$user->city}}</div>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">State.</label>
-                                              <div class="border">{{$user->state}}</div>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">Country</label>
-                                              <div class="border">{{$user->country}}</div>
-                                    </div>
-                                    <div class="col-md-4 mt-3">
-                                          <label for="">Post Code</label>
-                                          <div class="border">{{$user->pincode}}</div>
-                                    </div>                                 
+                            
 
                               </div>
 

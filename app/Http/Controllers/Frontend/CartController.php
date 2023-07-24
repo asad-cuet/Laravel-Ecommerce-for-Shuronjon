@@ -14,7 +14,6 @@ class CartController extends Controller
     public function addProduct(Request $request)
     {
           $product_id=$request->input('product_id');
-          $product_qty=$request->input('product_qty');
 
           if(Auth::check())
           {
@@ -30,7 +29,7 @@ class CartController extends Controller
                   $cartItem=new Cart();
                   $cartItem->user_id=Auth::id();
                   $cartItem->prod_id=$request->input('product_id');
-                  $cartItem->prod_qty=$request->input('product_qty');
+                  $cartItem->prod_qty=1;
                   $cartItem->save();
                   return response()->json(['status'=>$prod_check->name.' Added to Cart']);
                   }
@@ -42,12 +41,69 @@ class CartController extends Controller
           }
     }
 
+    public function removeProduct(Request $request)
+    {
+        $product_id=$request->input('product_id');
+        $cart=Cart::where('user_id',Auth::id())->where('prod_id',$product_id)->first();
+        $cart->delete();
+        return response()->json(['status'=>"Product Removed from Cart"]);
+    }
+
+    public function incrementProduct(Request $request)
+    {
+        $product_id=$request->input('product_id');
+        $cart=Cart::where('user_id',Auth::id())->where('prod_id',$product_id)->first();
+
+        $prod_qty=1;
+        if($cart!='')
+        {
+            if(($cart->product->qty) >= ($prod_qty))
+            {
+                $cart->prod_qty+=$prod_qty;
+                $cart->update();
+                return response()->json(['status'=>"Product Incremented."]);
+            }
+            else
+            {
+                return response()->json(['status'=>'out_of_stock']);
+            }
+
+        }
+
+        return response()->json(['status'=>'Failed']);
+    }
+
+    public function decrementProduct(Request $request)
+    {
+        $product_id=$request->input('product_id');
+        $cart=Cart::where('user_id',Auth::id())->where('prod_id',$product_id)->first();
+
+        $prod_qty=1;
+        if($cart!='')
+        {
+            if($cart->prod_qty==1)
+            {
+                $cart->delete();
+                return response()->json(['status'=>"Product Removed."]);
+            }
+            else
+            {
+                $cart->prod_qty-=$prod_qty;
+                $cart->update();
+                return response()->json(['status'=>"Product Decremented."]);
+            }
+
+        }
+
+        return response()->json(['status'=>'Failed']);
+    }
+
 
 
     public function viewCart()
     {
-        $product=Cart::where('user_id',Auth::id())->orderBy('id','DESC')->get();
-        return view('frontend.cart',['product'=>$product]);
+        $carts=Cart::where('user_id',Auth::id())->orderBy('id','DESC')->get();
+        return view('frontend2.cart',['carts'=>$carts]);
     }
 
 

@@ -57,8 +57,6 @@
   <script src="{{asset('js/auto_complete.js')}}"></script>
   {{-- Design --}}
   <script src="{{asset('frontend/js/script.js')}}"></script>
-  <!--   Custome JS Files   -->
-  <script src="{{asset('js/custom.js')}}"></script>
     <!--   Checkout JS Files   -->
   <script src="{{asset('js/checkout.js')}}"></script> 
   <!--   Sweet alert JS Files   -->

@@ -40,6 +40,7 @@ Home
  }
 
  input[type="text"],
+ input[type="email"],
  input[type="password"] {
    width: 100%;
    padding: 10px;
@@ -93,31 +94,18 @@ Home
 <section id="signup">
   <div class="container">
     <h1>Sign Up</h1>
-    <form>
-      <div class="error" id="error-message"></div>
-      <input type="text" placeholder="Username" id="username" required>
-      <input type="password" placeholder="Password" id="password" required>
-      <input type="submit" value="Sign Up" onclick="validateForm(event)">
+    <form method="POST" action="{{ route('register') }}">
+      @csrf
+      <input type="text" placeholder="Name" id="name" name="name" required>
+      <input type="email" placeholder="Email" id="email" name="email" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
+      <input type="submit" value="Sign Up">
     </form>
     <p>Already have an account? <a href="signin.html">SIGN UP</a></p>
   </div>
 <div ><img src="/img/robotics2/signin.jpg" alt=""></div>
-  <script>
-    function validateForm(event) {
-      event.preventDefault();
-      
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
-      var errorMessage = document.getElementById('error-message');
-      
-      if (username === '' || password === '') {
-        errorMessage.textContent = 'Please fill in all fields.';
-      } else {
-        
-        alert('Form submitted!');
-      }
-    }
-  </script>
+
  </section>
 
 @endsection

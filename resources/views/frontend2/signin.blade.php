@@ -77,10 +77,11 @@ Sign In
 <section id="sign">
   <div class="container">
     <h2>SIGN IN</h2>
-    <form>
+    <form method="POST" action="{{ route('login') }}">
+      @csrf
       <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <label for="username">Email:</label>
+        <input type="text" id="email" name="email" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
@@ -89,22 +90,6 @@ Sign In
       <div class="form-group">
         <input type="submit" value="Sign In">
       </div>
-      <script>
-        function validateForm(event) {
-          event.preventDefault();
-          
-          var username = document.getElementById('username').value;
-          var password = document.getElementById('password').value;
-          var errorMessage = document.getElementById('error-message');
-          
-          if (username === '' || password === '') {
-            errorMessage.textContent = 'Please fill in all fields.';
-          } else {
-           
-            alert('Form submitted!');
-          }
-        }
-      </script>
     </form>
   </div>
   <div>

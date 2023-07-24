@@ -24,17 +24,23 @@ use App\Models\Category;
 //new
 Route::get('/','Frontend\FrontendController@index')->name('frontend2.index');
 Route::get('shop','Frontend\FrontendController@shopView')->name('frontend2.shop.view');
-Route::get('carts','Frontend\FrontendController@cart')->name('frontend2.cart.view');
 Route::get('sign-up','Frontend\LoginController@signUp')->name('frontend2.signup');
 Route::get('sign-in','Frontend\LoginController@signIn')->name('frontend2.signin');
 
+Route::get('carts','Frontend\CartController@viewCart')->name('frontend2.cart.view');
+Route::post('/add-to-cart','Frontend\CartController@addProduct');
+Route::post('/remove-from-cart','Frontend\CartController@removeProduct');
+Route::post('/increment-cart','Frontend\CartController@incrementProduct');
+Route::post('/decrement-cart','Frontend\CartController@decrementProduct');
+Route::any('/place-order','Frontend\CheckoutController@placeOrder');
+Route::get('/my-orders','Frontend\UserController@index');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //old
 Route::get('category','Frontend\FrontendController@category');
 Route::get('category/{slug}','Frontend\FrontendController@view_category');
 Route::get('category/{cate_slug}/{prod_slug}','Frontend\FrontendController@view_product');
-Route::post('/add-to-cart','Frontend\CartController@addProduct');
 Route::get('/load-cart-data','Frontend\CartController@load_cart_data');
 Route::get('/product-list','Frontend\FrontendController@ajax_product_list');
 Route::post('/search-product','Frontend\FrontendController@search_products');
@@ -47,8 +53,8 @@ Route::middleware('auth')->group(function() {   // use for verify email:  ['auth
     Route::post('/delete-cart-item','Frontend\CartController@deleteCartItem');
     Route::post('/update-cart','Frontend\CartController@updateCart');
     Route::get('/checkout','Frontend\CheckoutController@index');
-    Route::any('/place-order','Frontend\CheckoutController@placeOrder');
-    Route::get('/my-orders','Frontend\UserController@index');
+
+
     Route::get('/view-order/{order_id}','Frontend\UserController@view_order');
     Route::get('/wishlist','Frontend\WishlistController@index');
     Route::post('/add-to-wishlist','Frontend\WishlistController@add_to_wishlist');
@@ -62,9 +68,7 @@ Route::middleware('auth')->group(function() {   // use for verify email:  ['auth
     Route::any('/ssl-payment','Frontend\SslController@payment');
 });
 
-Auth::routes(['verify'=>true]);
-
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
 
 
 

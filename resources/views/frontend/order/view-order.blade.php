@@ -1,7 +1,13 @@
-@extends('layouts.frontend')
+@extends('layouts.frontend2')
 
 @section('title')
    
+@endsection
+
+@section('meta')
+<link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('frontend/css/bootstrap.min.css.map') }}" rel="stylesheet">
+<link href="{{ asset('frontend/js/bootstrap.bundle.min.js.map') }}" rel="stylesheet">
 @endsection
 
 
@@ -22,18 +28,14 @@
                                     <div class="col-md-6">
                                           <h4>Shopping Details</h4>
                                           <hr>
-                                              <label for="">First Name</label>
-                                              <div class="border p-2">{{$order->fname}}</div>
-                                              <label for="">Last Name</label>
-                                              <div class="border p-2">{{$order->lname}}</div>
+                                              <label for="">Name</label>
+                                              <div class="border p-2">{{$order->user->name}}</div>
                                               <label for="">Email</label>
-                                              <div class="border p-2">{{$order->email}}</div>
+                                              <div class="border p-2">{{$order->user->email}}</div>
                                               <label for="">Contact No.</label>
                                               <div class="border p-2">{{$order->phone}}</div>
                                               <label for="">Shipping Address</label>
-                                              <div class="border p-2">{{$order->address1.','.$order->address2.','.$order->city.','.$order->state.','.$order->country}}</div>
-                                              <label for="">Post Code.</label>
-                                              <div class="border">{{$order->pincode}}</div>
+                                              <div class="border p-2">{{$order->address1.','.$order->city.','.$order->state.','.$order->country}}</div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -64,7 +66,7 @@
                                           </table>
                                           </div>
                                           <h4 class="px-2">Grand Total:<span class="float-end">$ {{$order->total_price}}</span></h4>
-                                          <h6 class="px-2"><span class="float-end"> {{$order->payment_mode=='COD' ? 'Cash On Delivery':$order->payment_mode}}</span></h6>
+                                          <h4 class="px-2">Payment:<span class="float-end">{{$order->payment_mode=='cod' ? 'Cash On Delivery':$order->payment_mode}}</span></h4>
                                     </div>
                               </div>
 

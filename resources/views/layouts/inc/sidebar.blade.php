@@ -15,12 +15,12 @@
               <p>Dashboard</p>
             </a>
           </li>
-          <li class="nav-item {{Request::is('categories') ? 'active':'' }}">
+          {{-- <li class="nav-item {{Request::is('categories') ? 'active':'' }}">
             <a class="nav-link" href="{{url('/categories')}}">
               <i class="material-icons">library_books</i>
               <p>Category</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item {{Request::is('products') ? 'active':'' }}">
             <a class="nav-link" href="{{url('/products')}}">
               <i class="material-icons">library_books</i>
@@ -43,13 +43,6 @@
             </a>
           </li>
 
-
-          <li class="nav-item {{Request::is('setting') ? 'active':'' }}">
-            <a class="nav-link" href="{{url('/setting')}}">
-              <i class="material-icons">library_books</i>
-              <p>Setting</p>
-            </a>
-          </li>
 
         </ul>
       </div>

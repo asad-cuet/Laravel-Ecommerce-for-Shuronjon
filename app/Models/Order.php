@@ -15,4 +15,9 @@ class Order extends Model
     {
          return $this->hasMany(Orderitem::class);
     }
+
+    public function user()  //making relationship
+    {
+         return $this->belongsTo(User::class,'user_id','id');
+    }
 }
