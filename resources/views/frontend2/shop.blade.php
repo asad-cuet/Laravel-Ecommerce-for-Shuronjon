@@ -33,7 +33,6 @@ Home
             <div class="pro">
                 <img src="{{asset('assets/uploads/product/'.$product->image)}}" >
             <div class="des">
-                <span>{{$product->category->name}}</span>
                 <h5><a href="sproduct.html">{{$product->name}}</a>
                 </h5>
                 <div class="star">

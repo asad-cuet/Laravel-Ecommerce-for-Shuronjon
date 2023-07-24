@@ -52,7 +52,6 @@ Home
         <div class="pro">
             <img src="{{asset('assets/uploads/product/'.$featured_product->image)}}" alt="">
             <div class="des">
-                <span>{{$featured_product->category->name}}</span>
                 <h5>{{$featured_product->name}}</h5>
                 <div class="star">
                     <i class="fas fa-star"></i>

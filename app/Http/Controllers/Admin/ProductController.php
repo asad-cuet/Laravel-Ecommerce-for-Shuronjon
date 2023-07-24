@@ -39,24 +39,12 @@ class ProductController extends Controller
             }
 
 
-            $product->cate_id=$request->input('cate_id');
             $product->name=$request->input('name');
             $product->slug=$request->input('slug');
-            $product->small_description=$request->input('small_description');
-            $product->description=$request->input('description');
-            $product->original_price=$request->input('original_price');
             $product->selling_price=$request->input('selling_price');
             $product->qty=$request->input('qty');
-            $product->tax=$request->input('tax');
             $product->status=$request->input('status')==True ? '1' : '0';
             $product->trending=$request->input('trending')==True ? '1' : '0';
-            $product->meta_title=$request->input('meta_title');
-            $product->meta_keywords=$request->input('meta_keywords');
-            $product->meta_descript=$request->input('meta_descript');
-    
-      
-    
-
             $product->save();
             return redirect(route('product'))->with('status','product Added!!');
           
@@ -95,24 +83,12 @@ class ProductController extends Controller
             $product->image=$filename;
         }
 
-
-
-        
-        $product->cate_id=$request->input('cate_id');
         $product->name=$request->input('name');
         $product->slug=$request->input('slug');
-        $product->small_description=$request->input('small_description');
-        $product->description=$request->input('description');
-        $product->original_price=$request->input('original_price');
         $product->selling_price=$request->input('selling_price');
         $product->qty=$request->input('qty');
-        $product->tax=$request->input('tax');
         $product->status=$request->input('status')==True ? '1' : '0';
         $product->trending=$request->input('trending')==True ? '1' : '0';
-        $product->meta_title=$request->input('meta_title');
-        $product->meta_keywords=$request->input('meta_keywords');
-        $product->meta_descript=$request->input('meta_descript');
-
   
         $product->save();
         return redirect(route('product'))->with('status','Product Updated Successfully');
@@ -140,11 +116,6 @@ class ProductController extends Controller
         if($product_name!='')
         {
             $product=Product::where('name','LIKE','%'.$product_name.'%')
-                             ->orWhere('meta_title','LIKE','%'.$product_name.'%')
-                             ->orWhere('meta_keywords','LIKE','%'.$product_name.'%')
-                             ->orWhere('meta_descript','LIKE','%'.$product_name.'%')
-                             ->orWhere('small_description','LIKE','%'.$product_name.'%')
-                             ->orWhere('description','LIKE','%'.$product_name.'%')
                              ->paginate(50);
             if($product)
             {
